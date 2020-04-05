@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ajax Example</title>
+    <script>
+        var request = new XMLHttpRequest();
+
+        function searchInfo() {
+            var name = document.usertForm.studentname.value;
+            var url = "index.jsp?val=" + name;
+            try{
+                request.onreadystatechange = function () {
+                    if (request.readyState == 4){
+                        var val = request.responseText;
+                        document.getElementById('myLocation').innerHTML = val;
+                    }
+                }
+                request.open("GET", url)
+                request.send();
+            }catch (e) {
+                alert("Unable connect to server");
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Student search</h1>
+<form name="usertForm">
+    <input type="text" name="studentname" onkeyup="searchInfo()">
+</form>
+<span id="myLocation"></span>
+</body>
+</html>
